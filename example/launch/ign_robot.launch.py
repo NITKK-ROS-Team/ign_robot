@@ -80,9 +80,17 @@ def generate_launch_description():
                         plugin='joy2direct::Joy2Direct',
                         name='joy2direct',
                         remappings=[
-                            ('commands', '/velocity_controller/commands')
+                            ('commands', '/slidar_velocity_controller/commands')
                         ]
                     ),
+                    ComposableNode(
+                        package='ign_robot',
+                        plugin='joy2angle::Joy2Angle',
+                        name='joy2angle',
+                        remappings=[
+                            ('commands', '/cart_angle_controller/commands')
+                        ]
+                    )
                 ]
     )
 
@@ -108,7 +116,12 @@ def generate_launch_description():
 # direct ---------------------------------------------------------------
     direct_acting = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
-            'velocity_controller'],
+            'slidar_velocity_controller'],
+        output='screen'
+    )
+    cart_angle_controller = ExecuteProcess(
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+            'cart_angle_controller'],
         output='screen'
     )
 # imu ---------------------------------------------------------------
@@ -158,6 +171,13 @@ def generate_launch_description():
             event_handler=OnProcessExit(
                 target_action=load_joint_state_controller,
                 on_exit=[direct_acting],
+            )
+        ),
+        # cart2cart ---------------------------------------------------------------
+        RegisterEventHandler(
+            event_handler=OnProcessExit(
+                target_action=load_joint_state_controller,
+                on_exit=[cart_angle_controller],
             )
         ),
         # imu (<- direct) ---------------------------------------------

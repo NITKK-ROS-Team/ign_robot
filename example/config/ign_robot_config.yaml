@@ -8,7 +8,10 @@ controller_manager:
     diff_drive_base_controller:
       type: diff_drive_controller/DiffDriveController
 
-    velocity_controller:
+    slidar_velocity_controller:
+      type: velocity_controllers/JointGroupVelocityController
+    
+    cart_angle_controller:
       type: velocity_controllers/JointGroupVelocityController
 
     imu_sensor_broadcaster:
@@ -63,10 +66,20 @@ diff_drive_base_controller:
     angular.z.min_jerk: 0.0
 
 
-velocity_controller:
+slidar_velocity_controller:
   ros__parameters:
     joints:
       - slider_to_cart
+    command_interfaces:
+      - velocity
+    state_interfaces:
+      - position
+      - velocity
+
+cart_angle_controller:
+  ros__parameters:
+    joints:
+      - cart_to_cart_hinge
     command_interfaces:
       - velocity
     state_interfaces:

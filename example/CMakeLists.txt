@@ -40,6 +40,16 @@ rclcpp_components_register_node(
     EXECUTABLE ${TARGET}_node
 )
 # ----------------------------------------------
+set(TARGET joy2angle)
+ament_auto_add_library(${TARGET} SHARED
+  examples/${TARGET}.cpp
+)
+rclcpp_components_register_node(
+  ${TARGET}
+    PLUGIN "joy2angle::Joy2Angle"
+    EXECUTABLE ${TARGET}_node
+)
+# ----------------------------------------------
 
 
 if(BUILD_TESTING)
