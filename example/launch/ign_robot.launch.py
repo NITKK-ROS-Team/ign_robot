@@ -47,6 +47,7 @@ def generate_launch_description():
                    '-name', 'cartpole',
                    '-allow_renaming', 'true'],
     )
+    # ros2 run ros_ign_bridge parameter_bridge /image@sensor_msgs/msg/Image@ignition.msgs.Image
 
     # teleop twist joy
     joy_launch_arg = DeclareLaunchArgument(
