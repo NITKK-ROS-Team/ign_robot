@@ -1,18 +1,12 @@
 <?xml version="1.0"?>
-<package format="2">
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
   <name>ign_robot</name>
   <version>0.4.1</version>
-  <description>ign_ros2_control_demos</description>
+  <description>ign_robot</description>
 
   <maintainer email="ahcorde@osrfoundation.org">Alejandro Hernandez</maintainer>
-
   <license>Apache License 2.0</license>
-
-  <url type="website">https://github.com/ignitionrobotics/ign_ros2_control/blob/main/README.md</url>
-  <url type="bugtracker">https://github.com/ros-simulation/gazebo_ros2_control/issues</url>
-  <url type="repository">https://github.com/ignitionrobotics/ign_ros2_control</url>
-
-  <author>Alejandro Hernández</author>
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
@@ -45,6 +39,6 @@
   <test_depend>ament_lint_common</test_depend>
 
   <export>
-    <type>ament_cmake</type>
+    <build_type>ament_cmake</build_type>
   </export>
 </package>
