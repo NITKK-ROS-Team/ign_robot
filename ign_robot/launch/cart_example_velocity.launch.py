@@ -23,7 +23,7 @@ def generate_launch_description():
         get_package_share_directory('ign_robot'))
 
     xacro_file = os.path.join(ignition_ros2_control_demos_path,
-                              'urdf',
+                              'urdf', 'example',
                               'test_cart_velocity_1m_z.xacro.urdf')
 
     doc = xacro.parse(open(xacro_file))
@@ -38,7 +38,7 @@ def generate_launch_description():
     )
 
     ignition_spawn_entity = Node(
-        package='ros_ign_gazebo',
+        package='ros_gz_sim',
         executable='create',
         output='screen',
         arguments=['-string', doc.toxml(),
@@ -47,19 +47,19 @@ def generate_launch_description():
     )
 
     load_joint_state_broadcaster = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
              'joint_state_broadcaster'],
         output='screen'
     )
 
     load_joint_trajectory_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
             'velocity_controller'],
         output='screen'
     )
 
     load_imu_sensor_broadcaster = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
              'imu_sensor_broadcaster'],
         output='screen'
     )
