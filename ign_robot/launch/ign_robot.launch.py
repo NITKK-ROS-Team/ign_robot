@@ -97,7 +97,7 @@ def generate_launch_description():
 
 # broadcaster
     load_joint_state_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
              'joint_state_broadcaster'],
         output='screen'
     )
@@ -110,24 +110,24 @@ def generate_launch_description():
 
 # diff drive controller -------------------------------------------------------
     diff_drive = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
              'diff_drive_base_controller'],
         output='screen'
     )
 # direct ---------------------------------------------------------------
     direct_acting = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
             'slidar_velocity_controller'],
         output='screen'
     )
     cart_angle_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
             'cart_angle_controller'],
         output='screen'
     )
 # imu ---------------------------------------------------------------
     load_imu_sensor_broadcaster = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'start',
+        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
              'imu_sensor_broadcaster'],
         output='screen'
     )
