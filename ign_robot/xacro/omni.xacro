@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<robot name="my_robo" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find ign_robot)/xacro/odm_common.xacro"/>
+  <xacro:include filename="$(find ign_robot)/xacro/odm_omni_wheel_set1.xacro"/>
+
+  <link name="base_link"/>
+
+  <link name="cart_base">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.03"/>
+      </geometry>
+      <material name="yellow" />
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.1 0.1 0.03"/>
+      </geometry>
+    </collision>
+    <inertial>
+      <mass value="0.1"/>
+      <inertia ixx="0.0001" ixy="0" ixz="0" iyy="0.0001" iyz="0" izz="0.0001"/>
+    </inertial>
+  </link>
+
+  <!-- wheel -->
+  <xacro:omni_wheel_set prefix="wheel0" parent="cart_base" dist_x="0.05" dist_y="0.05" dist_z="-0.01" yaw="0.7853981633974483" />
+  <xacro:omni_wheel_set prefix="wheel1" parent="cart_base" dist_x="-0.05" dist_y="0.05" dist_z="-0.01" yaw="2.356194490192345" />
+  <xacro:omni_wheel_set prefix="wheel2" parent="cart_base" dist_x="0.05" dist_y="-0.05" dist_z="-0.01" yaw="-0.7853981633974483" />
+  <xacro:omni_wheel_set prefix="wheel3" parent="cart_base" dist_x="-0.05" dist_y="-0.05" dist_z="-0.01" yaw="-2.356194490192345" />
+
+
+  <joint name="base_to_cart_base" type="fixed">
+    <parent link="base_link"/>
+    <child link="cart_base"/>
+    <origin xyz="0 0 1" rpy="0 0 0"/>
+  </joint>
+
+
+  <gazebo>
+    <plugin filename="ign_ros2_control-system" name="ign_ros2_control::IgnitionROS2ControlPlugin">
+      <parameters>$(find ign_robot)/config/omni_config.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+
+</robot>

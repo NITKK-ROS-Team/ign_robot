@@ -18,6 +18,10 @@ import xacro
 def generate_launch_description():
     # Launch Arguments
     use_sim_time = LaunchConfiguration('use_sim_time', default=True)
+    use_sim_time_arg = DeclareLaunchArgument(
+        'use_sim_time',
+        default_value=use_sim_time,
+        description='If true, use simulated clock')
 
     ignition_ros2_control_demos_path = os.path.join(
         get_package_share_directory('ign_robot'))
@@ -54,7 +58,7 @@ def generate_launch_description():
 
     load_joint_trajectory_controller = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-            'velocity_controller'],
+             'velocity_controller'],
         output='screen'
     )
 
@@ -69,8 +73,7 @@ def generate_launch_description():
         IncludeLaunchDescription(
             PythonLaunchDescriptionSource(
                 [os.path.join(get_package_share_directory('ros_ign_gazebo'),
-                              'launch', 'ign_gazebo.launch.py')]),
-            launch_arguments=[('ign_args', [' -r -v 4 empty.sdf'])]),
+                              'launch', 'ign_gazebo.launch.py')])),
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=ignition_spawn_entity,
@@ -92,8 +95,5 @@ def generate_launch_description():
         node_robot_state_publisher,
         ignition_spawn_entity,
         # Launch Arguments
-        DeclareLaunchArgument(
-            'use_sim_time',
-            default_value=use_sim_time,
-            description='If true, use simulated clock'),
+        use_sim_time_arg,
     ])

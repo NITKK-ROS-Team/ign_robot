@@ -1,0 +1,46 @@
+controller_manager:
+  ros__parameters:
+    update_rate: 100  # Hz
+
+    joint_state_broadcaster:
+      type: joint_state_broadcaster/JointStateBroadcaster
+
+    omni_0:
+      type: velocity_controllers/JointGroupVelocityController
+    omni_1:
+      type: velocity_controllers/JointGroupVelocityController
+    omni_2:
+      type: velocity_controllers/JointGroupVelocityController
+    omni_3:
+      type: velocity_controllers/JointGroupVelocityController
+
+omni_0:
+  ros__parameters:
+    joints:
+      - wheel0_motor_shaft_joint
+    command_interfaces:
+      - velocity
+    # state_interfaces:
+    #   - position
+    #   - velocity
+
+omni_1:
+  ros__parameters:
+    joints:
+      - wheel1_motor_shaft_joint
+    command_interfaces:
+      - velocity
+
+omni_2:
+  ros__parameters:
+    joints:
+      - wheel2_motor_shaft_joint
+    command_interfaces:
+      - velocity
+
+omni_3:
+  ros__parameters:
+    joints:
+      - wheel3_motor_shaft_joint
+    command_interfaces:
+      - velocity
